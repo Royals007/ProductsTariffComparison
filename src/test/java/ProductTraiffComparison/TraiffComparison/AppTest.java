@@ -19,7 +19,7 @@ import ProductTraiffComparison.TraiffComparison.Tariff.TariffCompare;
 class AppTest {
 
 	private Product product;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		product = new ProductPackagedTariff();
@@ -33,7 +33,7 @@ class AppTest {
 	void test() {
 		//fail("Not yet implemented");
 	}
-	
+
 	@Test
 	void sortedTariffByAnnualCosts() {
 		ProductBasicTariff productBasicTariff = new ProductBasicTariff();
@@ -41,8 +41,7 @@ class AppTest {
 		tariffs.add(new Tariff(productBasicTariff, 2000));
 		tariffs.add(new Tariff(productBasicTariff, 500));
 		List<Tariff> sortedTariff = tariffs.sortByAnnualCosts().collect(Collectors.toList());
-		//assertThat(sortedTariff.get(0).getAnnualCosts())
 		assertThat(sortedTariff.get(0).getAnnualCosts())
-				.isLessThan(sortedTariff.get(1).getAnnualCosts());
+					.isLessThan(sortedTariff.get(1).getAnnualCosts());
 	}
 }
