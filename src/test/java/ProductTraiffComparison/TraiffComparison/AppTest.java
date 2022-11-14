@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,14 @@ import ProductTraiffComparison.TraiffComparison.Tariff.TariffCompare;
 
 class AppTest {
 
-	private Product product;
+	private Product basicProductTraiff;
+	private Product packagedProductTraiff;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		product = new ProductPackagedTariff();
+		
+		basicProductTraiff = new ProductBasicTariff();
+		packagedProductTraiff = new ProductPackagedTariff();
 	}
 
 	@AfterEach
@@ -30,11 +34,40 @@ class AppTest {
 	}
 
 	@Test
-	void test() {
-		//fail("Not yet implemented");
+	// ValidInput
+	void testValidInput() {
+		int consumption = 3000;
+		assertEquals(consumption, 3000);
+	}
+	
+	@Test
+	void testInvalidInput() {
+		int consumption = 3000;
+		assertNotEquals(consumption, 4000);
+	}
+	
+	
+	@Test
+	// basicProductcalConsumption
+	void testBasicCalculateConsumption() {
+		int consumption = 3500;
+		int expectedCostsYearly = 830;
+		Tariff tariff = new Tariff(basicProductTraiff, consumption);
+		assertEquals(tariff.getAnnualCosts(),expectedCostsYearly);
+	}
+	
+	@Test
+	// packagedCalConsumption
+	void testPackagedConsumptionCalculate() {
+		int consumption = 4000;
+		double expectedCostsYearly = 800.0;
+		Tariff tariff = new Tariff(packagedProductTraiff, consumption);
+		assertEquals(tariff.getAnnualCosts(),expectedCostsYearly);
 	}
 
+
 	@Test
+	// CalculationSortedYearly
 	void sortedTariffByAnnualCosts() {
 		ProductBasicTariff productBasicTariff = new ProductBasicTariff();
 		TariffCompare tariffs = new TariffCompare();
